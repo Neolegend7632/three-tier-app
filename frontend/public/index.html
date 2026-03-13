@@ -88,7 +88,7 @@
 
   <script>
     const API = '/api/tasks';
-
+// This Function loads all existing tasks from the backend
     async function loadTasks() {
       try {
         const res = await fetch(API);
@@ -117,7 +117,7 @@
         list.appendChild(li);
       });
     }
-
+// This Function allows for new tasks to be added to the backend
     async function addTask() {
       const input = document.getElementById('taskInput');
       const title = input.value.trim();
@@ -130,7 +130,7 @@
       input.value = '';
       loadTasks();
     }
-
+// This Function allows for changing tasks
     async function toggleTask(id, currentDone) {
       await fetch(`${API}/${id}`, {
         method: 'PUT',
@@ -139,7 +139,7 @@
       });
       loadTasks();
     }
-
+// This Function is for deleting existing tasks
     async function deleteTask(id) {
       await fetch(`${API}/${id}`, { method: 'DELETE' });
       loadTasks();
