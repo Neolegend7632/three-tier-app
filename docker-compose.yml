@@ -1,52 +1,58 @@
-version: '3.8'
+#This file tells Docker how to start our whole app (frontend + backend + database)
 
-services:
+version: '3.8'  # We are using version 3.8 of the docker-compose format
 
-  db:
-    image: mysql:8.0
+services:  # This is the main part — it lists the three containers/services we want to run
+
+  db:  # DATABASE SERVICE (MySQL)
+    image: mysql:8.0  # This container runs MySQL 8.0 to store our data
     container_name: tasks_db
     restart: always
     environment:
-      MYSQL_DATABASE: tasksdb
+      MYSQL_DATABASE: tasksdb   #This creates a database called tasks_db
       MYSQL_USER: appuser
       MYSQL_PASSWORD: apppassword
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: rootpassword  # This sets a root password 
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql   # Data is saved in a volume so it doesn't disappear when we stop Docker
     networks:
       - app-network
 
-  backend:
-    build: ./backend
+  # This is our API/server code (Node.js, Express)
+  backend: # BACKEND SERVICE
+    build: ./backend   # Builds from the backend folder
     container_name: tasks_backend
     restart: always
     environment:
-      DB_HOST: db
+      DB_HOST: db   # Tells backend to connect to 'db' container
       DB_PORT: 3306
       DB_NAME: tasksdb
       DB_USER: appuser
       DB_PASSWORD: apppassword
     ports:
-      - "5000:5000"
+      - "5000:5000"   # Outside can reach it on port 5000
     depends_on:
-      - db
+      - db  # It waits for the database to be ready before starting
     networks:
       - app-network
 
-  frontend:
-    build: ./frontend
+
+  # This is the website users see (nginx, html, css)
+  frontend:  # FRONTEND SERVICE
+    build: ./frontend  # Builds from the frontend folder
     container_name: tasks_frontend
     restart: always
     ports:
-      - "3000:80"
+      - "3000:80" 
     depends_on:
-      - backend
+      - backend   # It waits for backend to be ready
     networks:
       - app-network
 
 networks:
   app-network:
     driver: bridge
-
+# This creates a permanent storage area for MySQL data
 volumes:
   db_data:
+  
