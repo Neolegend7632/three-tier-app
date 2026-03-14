@@ -194,13 +194,10 @@ Go to your repo → **Settings → Secrets and variables → Actions** and add:
 | Name                | Role                          |
 |---------------------|-------------------------------|
 | Mitaire Oteri       | Project Lead / GitHub Manager |
-| Kareem Sodiq        | Frontend Development          |
 | Ridwan Shekoni      | Frontend Development          |
-| Ogieasor Ugiomoh    | Backend Development           |
 | Jamiu Maemunat      | Backend Development           |
 | Akintomide Tiwajope | Database & Docker Compose     |
 | Tominsin Olusesi    | Dockerfile Engineer           |
-| Blessing Oscar      | Dockerfile Engineer           |
 | Salami Patrick      | Docker Hub Manager & CI/CD    |
 | Feyijimi Stephen    | Cloud Deployment              |
 | Ayomide Sufian      | Cloud Deployment              |
