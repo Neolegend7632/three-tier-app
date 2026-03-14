@@ -213,6 +213,8 @@ Go to your repo → **Settings → Secrets and variables → Actions** and add:
 ### App Live Add Task
 ![App Live Add Task](screenshots/live-app-add-task-input-state.png)
 
+### App Local Host
+![App Local Host](screenshots/app-running-localhost-docker.png)
 
 ### Docker Hub Respositories
 ![Docker Hub](screenshots/dockerhub-images.png)
