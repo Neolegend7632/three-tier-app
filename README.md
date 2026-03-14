@@ -225,3 +225,6 @@ Go to your repo → **Settings → Secrets and variables → Actions** and add:
 
 ### CI/CD Pipeline Success
 ![CI/CD Success](screenshots/cicd-pipeline-success.png)
+
+### Docker Build
+![Docker Build Image](screenshots/docker-build.png)
