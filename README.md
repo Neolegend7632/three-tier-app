@@ -2,6 +2,9 @@
 
 A fully containerized three-tier web application built with **Node.js**, **MySQL**, and **nginx**, orchestrated with **Docker Compose** and automated with **GitHub Actions CI/CD**.
 
+## Live Application
+The app is live and accessible here: http://54.163.30.34:3000
+
 ---
 
 ## 🏗️ Architecture Overview
@@ -202,3 +205,28 @@ Go to your repo → **Settings → Secrets and variables → Actions** and add:
 | Feyijimi Stephen    | Cloud Deployment              |
 | Ayomide Sufian      | Cloud Deployment              |
 | Iroh Munachimso     | Documentation & Testing       |
+
+##Screenshots
+### Live App List state
+![App Live List](screenshots/live-app-task-list-populated.png)
+
+### App Live Add Task
+![App Live Add Task](screenshots/live-app-add-task-input-state.png)
+
+### App Local Host
+![App Local Host](screenshots/app-running-localhost-docker.png)
+
+### Docker Hub Respositories
+![Docker Hub](screenshots/dockerhub-images.png)
+
+### AWS EC2 Instance
+![AWS EC2](screenshots/aws-ec2-instance.png)
+
+### App Live VM
+![Live App](screenshots/app-live-url.png)
+
+### CI/CD Pipeline Success
+![CI/CD Success](screenshots/cicd-pipeline-success.png)
+
+### Docker Build
+![Docker Build Image](screenshots/docker-build.png)
