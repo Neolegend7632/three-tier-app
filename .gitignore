@@ -35,3 +35,6 @@ coverage/
 # Build outputs
 dist/
 build/
+
+# SSH Private Key
+3_tier_app_key.pem
