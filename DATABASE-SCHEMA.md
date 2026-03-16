@@ -1,34 +1,51 @@
-# Database Schema - MySQL (To-Do App)
+# Database Schema - Student Task Manager
 
-Our to-do application allows users to create, view, update, and delete their personal tasks.
+## Overview
 
-We use two main tables:
+The **Student Task Manager** is a simple 3-tier web application that helps students track assignments, study tasks, and to-dos.  
+The database layer uses **MySQL** and stores user tasks with basic CRUD operations (Create, Read, Update, Delete) and status tracking.
 
-### 1. users table
-Stores user accounts (for login and ownership of tasks).
+Current frontend features supported by the schema:
+- Add new task
+- View list of tasks
+- Mark task as **Done** / **Undo** (toggle completion status)
+- Delete task
 
-| Column name   | Data type     | Description                              | Constraints / Extra                  |
-|---------------|---------------|------------------------------------------|--------------------------------------|
-| id            | INT           | Unique ID for each user                  | PRIMARY KEY, AUTO_INCREMENT          |
-| username      | VARCHAR(50)   | User's chosen username                   | NOT NULL, UNIQUE                     |
-| email         | VARCHAR(100)  | User's email address                     | NOT NULL, UNIQUE                     |
-| password      | VARCHAR(255)  | Hashed password (never store plain text) | NOT NULL                             |
-| created_at    | DATETIME      | When the account was created             | DEFAULT CURRENT_TIMESTAMP            |
+Future extensions (not yet implemented in frontend):
+- User authentication (multi-user support)
+- Due dates & priorities
+- Categories / subjects
 
-### 2. tasks table
-Stores the actual to-do items. Each task belongs to one user.
+## Entity-Relationship Summary
 
-| Column name   | Data type     | Description                              | Constraints / Extra                  |
-|---------------|---------------|------------------------------------------|--------------------------------------|
-| id            | INT           | Unique ID for each task                  | PRIMARY KEY, AUTO_INCREMENT          |
-| user_id       | INT           | Which user this task belongs to          | NOT NULL, FOREIGN KEY → users(id)    |
-| title         | VARCHAR(200)  | Short description of the task            | NOT NULL                             |
-| description   | TEXT          | Optional longer details                  | NULL allowed                         |
-| completed     | TINYINT(1)    | 0 = not done, 1 = done                   | DEFAULT 0                            |
-| due_date      | DATE          | Optional deadline                        | NULL allowed                         |
-| created_at    | DATETIME      | When the task was added                  | DEFAULT CURRENT_TIMESTAMP            |
-| updated_at    | DATETIME      | Last time the task was changed           | ON UPDATE CURRENT_TIMESTAMP          |
+At this stage we use a **very simple single-table design** suitable for the current frontend:
 
-### Quick Notes
-- One user can have many tasks (1-to-many relationship).
-- The `user_id` column connects each task to its owner.
+**Tasks** (main entity)
+
+- No separate Users table yet (single-user / shared list mode)
+- No separate Lists/Categories table (all tasks in one flat list)
+
+## Tables
+
+### 1. tasks
+
+Stores individual student tasks/assignments.
+
+| Column          | Data Type         | Constraints / Attributes                  | Description                                      |
+|-----------------|-------------------|-------------------------------------------|--------------------------------------------------|
+| id              | INT               | PRIMARY KEY, AUTO_INCREMENT               | Unique task identifier                           |
+| title           | VARCHAR(255)      | NOT NULL                                  | Main task name (e.g. "Assignment (week 1)")      |
+| status          | ENUM('pending', 'done') | NOT NULL, DEFAULT 'pending'         | Completion state (shown as "Done" / "Undo")      |
+
+## SQL Creation Script
+
+```sql
+CREATE DATABASE IF NOT EXISTS student_task_manager;
+USE student_task_manager;
+
+CREATE TABLE tasks (
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    title         VARCHAR(255) NOT NULL,
+    description   TEXT,
+    status        ENUM('pending', 'done') NOT NULL DEFAULT 'pending',
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
